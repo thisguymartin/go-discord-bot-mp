@@ -1,4 +1,4 @@
-module github/thisguymartin/go-discord-bot
+module github/thisguymartin/go-discord-bot-golang
 
 go 1.17
 
