@@ -1,1 +1,1 @@
-web: currency
+web: bin/go-discord-bot-mp
