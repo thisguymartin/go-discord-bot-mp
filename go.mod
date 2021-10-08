@@ -1,4 +1,4 @@
-module go-discord-bot
+module github.com/thisguymartin/go-discord-bot-mp
 
 go 1.17
 
