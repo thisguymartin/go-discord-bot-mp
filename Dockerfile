@@ -10,7 +10,7 @@ RUN go mod download
 # Copy app files
 COPY . .
 # Build app
-RUN go build -o app
+RUN go build -o app pkg/*
 
 FROM alpine:3.14 as production
 # Add certificates
