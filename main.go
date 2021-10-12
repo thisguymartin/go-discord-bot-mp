@@ -18,9 +18,6 @@ func main() {
 	godotenv.Load()
 
 	val, ok := os.LookupEnv("DISCORD_SECRET")
-	println(ok)
-	println(val)
-
 	if !ok {
 		log.Fatal("Missing Discord Secret")
 	} else {
@@ -46,5 +43,7 @@ func main() {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
+
+	dg.Close()
 
 }
