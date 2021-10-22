@@ -1,4 +1,4 @@
-module github.com/thisguymartin/go-discord-bot-mp
+module thisguymartin/go-discord-bot-mp
 
 go 1.17
 
@@ -9,5 +9,6 @@ require (
 
 require (
 	github.com/gorilla/websocket v1.4.0 // indirect
+	github.com/lib/pq v1.10.3 // indirect
 	golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16 // indirect
 )
