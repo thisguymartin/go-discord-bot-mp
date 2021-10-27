@@ -2,6 +2,9 @@ package main
 
 import (
 	"database/sql"
+
+	_ "github.com/lib/pq"
+
 	"fmt"
 	"log"
 	"os"
@@ -16,13 +19,6 @@ import (
 var DiscordSecret string
 var PG_URI string
 
-var (
-	PG_HOST     = os.Getenv("PG_HOST")
-	PG_DB       = os.Getenv("PG_PASSWORD")
-	PG_USER     = os.Getenv("PG_USER")
-	PG_PASSWORD = os.Getenv("PG_PASSWORD")
-)
-
 func main() {
 
 	godotenv.Load()
@@ -34,24 +30,21 @@ func main() {
 		DiscordSecret = val
 	}
 
-	var psqlInfo = fmt.Sprintf("host=%s port=%s  user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		PG_HOST, 5432, PG_USER, PG_PASSWORD, PG_PASSWORD)
-
-	db, err := sql.Open("postgres", psqlInfo)
+	db, err := sql.Open("postgres", os.Getenv("PG_URI"))
 	if err != nil {
 		log.Fatal("error connecting with postgres", err)
 	}
 
 	err = db.Ping()
-	pkg.CheckError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println("Successfully created connection to database")
-
 	defer db.Close()
 
 	dg, err := discordgo.New("Bot " + DiscordSecret)
 	if err != nil {
-		pkg.CheckError(err)
+		log.Fatal("error connecting with postgres", err)
 	}
 
 	dg.AddHandler(pkg.MessageCreate)
