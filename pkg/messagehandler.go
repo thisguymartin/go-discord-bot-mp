@@ -141,32 +141,41 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if m.Content == "!wick" {
-		var giphyResponseJSON = new(GiphyResponse)
+	if m.Content == "kakashi" {
+		giphyResponseJSON := new(GiphyResponse)
+		response, err := http.Get("https://api.giphy.com/v1/gifs/random?api_key=" + os.Getenv("GIPHY_API_KEY") + "&tag=kakashi")
 
-		var giphyToken = os.Getenv("GIPHY_API_KEY")
-		response, err := http.Get("https://api.giphy.com/v1/gifs/random?api_key=" + giphyToken + "&tag=puppies")
 		if err != nil {
 			fmt.Println(err)
 		}
+
 		defer response.Body.Close()
 
 		body, err2 := ioutil.ReadAll(response.Body)
+
 		if err2 != nil {
-			panic(err.Error())
+			fmt.Println(err2)
 		}
 
 		err3 := json.Unmarshal(body, &giphyResponseJSON)
 		if err3 != nil {
-			fmt.Println("whoops:", err3)
-			//outputs: whoops: <nil>
+			fmt.Println(err3)
 		}
 
-		s.ChannelMessageSend(m.ChannelID, giphyResponseJSON.Data.URL)
+		_, err = s.ChannelMessageSend(m.ChannelID, giphyResponseJSON.Data.URL)
+		if err != nil {
+			fmt.Println(err)
+		}
 
-	} else {
-		fmt.Print("not wick")
-
+	} else if m.Content == "joke" {
+		joke, jokeerror := getJoke()
+		if jokeerror != nil {
+			fmt.Println("Fail fetch joke error")
+		}
+		_, discord_error := s.ChannelMessageSend(m.ChannelID, joke)
+		if discord_error != nil {
+			fmt.Println("Fail to send joke error")
+		}
 	}
 
 }
