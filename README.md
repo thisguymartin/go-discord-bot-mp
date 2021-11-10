@@ -1,7 +1,7 @@
 # Go Discord Bot
 
 
-[![Go report](http://goreportcard.com/badge/bwmarrin/disgord)](http://goreportcard.com/report/bwmarrin/disgord) [![Build Status](https://travis-ci.org/bwmarrin/disgord.svg?branch=master)](https://travis-ci.org/bwmarrin/disgord) [![Discord Gophers](https://img.shields.io/badge/Discord%20Gophers-%23info-blue.svg)](https://discord.gg/0f1SbxBZjYq9jLBk)
+ [![Discord Gophers](https://img.shields.io/badge/Discord%20Gophers-%23info-blue.svg)](https://discord.gg/0f1SbxBZjYq9jLBk)
 <img align="right" src="https://media.giphy.com/media/1AN73nSrDYhiM/giphy.gif">
 
 Dis**go**rd is an example of or starting point for creating an easy to use and 
